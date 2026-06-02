@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Find YouTube videos that closely match your search and surface the most information-rich results."
+    />
+    <title>YouTube Video Finder</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="hero" aria-labelledby="app-title">
+        <p class="eyebrow">Smarter video discovery</p>
+        <h1 id="app-title">Find the most useful YouTube videos for any topic</h1>
+        <p class="hero-copy">
+          Enter a topic, add your YouTube Data API key, and this app ranks matching
+          videos by relevance plus information signals like duration, views,
+          description depth, and engagement.
+        </p>
+      </section>
+
+      <section class="search-card" aria-label="Search form">
+        <form id="search-form" autocomplete="off">
+          <div class="field-group">
+            <label for="query">What do you want to learn?</label>
+            <input
+              id="query"
+              name="query"
+              type="search"
+              placeholder="e.g. how neural networks learn"
+              required
+            />
+          </div>
+
+          <div class="field-grid">
+            <div class="field-group">
+              <label for="api-key">YouTube Data API key</label>
+              <input
+                id="api-key"
+                name="apiKey"
+                type="password"
+                placeholder="Paste your API key"
+                required
+              />
+            </div>
+
+            <div class="field-group">
+              <label for="result-count">Results to compare</label>
+              <select id="result-count" name="resultCount">
+                <option value="10">10 videos</option>
+                <option value="15" selected>15 videos</option>
+                <option value="25">25 videos</option>
+              </select>
+            </div>
+          </div>
+
+          <details class="help-box">
+            <summary>How do I get an API key?</summary>
+            <p>
+              Create a key in Google Cloud for the YouTube Data API v3. The key is
+              used only in your browser for this search and is not stored by the app.
+            </p>
+          </details>
+
+          <button class="primary-button" type="submit">Find best videos</button>
+        </form>
+      </section>
+
+      <section class="status-card" aria-live="polite">
+        <p id="status-message">Search results will appear here.</p>
+      </section>
+
+      <section class="results-section" aria-labelledby="results-heading">
+        <div class="section-heading">
+          <p class="eyebrow">Ranked recommendations</p>
+          <h2 id="results-heading">Best matches</h2>
+        </div>
+        <div id="results" class="results-grid"></div>
+      </section>
+    </main>
+
+    <template id="video-card-template">
+      <article class="video-card">
+        <a class="thumbnail-link" target="_blank" rel="noopener noreferrer">
+          <img class="thumbnail" alt="" loading="lazy" />
+          <span class="duration"></span>
+        </a>
+        <div class="video-content">
+          <div class="rank-row">
+            <span class="rank-badge"></span>
+            <span class="score-pill"></span>
+          </div>
+          <h3><a class="video-title" target="_blank" rel="noopener noreferrer"></a></h3>
+          <p class="channel"></p>
+          <p class="description"></p>
+          <dl class="metric-list">
+            <div>
+              <dt>Views</dt>
+              <dd class="views"></dd>
+            </div>
+            <div>
+              <dt>Likes</dt>
+              <dd class="likes"></dd>
+            </div>
+            <div>
+              <dt>Published</dt>
+              <dd class="published"></dd>
+            </div>
+          </dl>
+          <p class="why"></p>
+        </div>
+      </article>
+    </template>
+
+    <script src="app.js" type="module"></script>
+  </body>
+</html>
